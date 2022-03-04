@@ -9,26 +9,33 @@ class OutputCalculator {
     var projects: List<ProjectModel>
     var proModel: ProModel
 
+
+
     constructor(proModel: ProModel, projects: List<ProjectModel>){
+        val educationLevelCalculator: OutputCalculatorI = EducationLevelCalculator()
+        val internetTestCalculator: OutputCalculatorI = InternetTestCalculator()
+        val pastExperiencesCalculator: OutputCalculatorI = PastExperiencesCalculator()
+        val referralCodeCalculator: OutputCalculatorI = ReferralCodeCalculator()
+        val writeScoreCalculator: OutputCalculatorI = WriteScoreCalculator()
         points += (
-                EducationLevelCalculator().calculate(proModel)
-                + InternetTestCalculator().calculate(proModel)
-                + PastExperiencesCalculator().calculate(proModel)
-                + ReferralCodeCalculator().calculate(proModel)
-                + WriteScoreCalculator().calculate(proModel)
+                educationLevelCalculator.calculate(proModel)
+                + internetTestCalculator.calculate(proModel)
+                + pastExperiencesCalculator.calculate(proModel)
+                + referralCodeCalculator.calculate(proModel)
+                + writeScoreCalculator.calculate(proModel)
                 )
         this.projects = projects
         this.proModel = proModel
     }
 
     fun runOutput(): OutputModel {
-        val selectedProject = projects.filter{ it.requiredScore<=points}.maxByOrNull{ it.requiredScore }
+        val selectedProject = projects.filter{ it.requiredScore<points}.maxByOrNull{ it.requiredScore }
         var eligibleProjects: MutableList<ProjectModel> = mutableListOf()
         val ineligibleProjects: MutableList<ProjectModel> = mutableListOf()
         for (project in projects){
-            if(project.requiredScore< points && project != selectedProject)
+            if(project.requiredScore< points)
                 eligibleProjects.add(project)
-            else if (project.requiredScore>= points && project != selectedProject)
+            else
                 ineligibleProjects.add(project)
         }
 
