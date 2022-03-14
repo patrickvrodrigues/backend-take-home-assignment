@@ -12,18 +12,13 @@ class OutputCalculator {
 
 
     constructor(proModel: ProModel, projects: List<ProjectModel>){
-        val educationLevelCalculator: OutputCalculatorI = EducationLevelCalculator()
-        val internetTestCalculator: OutputCalculatorI = InternetTestCalculator()
-        val pastExperiencesCalculator: OutputCalculatorI = PastExperiencesCalculator()
-        val referralCodeCalculator: OutputCalculatorI = ReferralCodeCalculator()
-        val writeScoreCalculator: OutputCalculatorI = WriteScoreCalculator()
-        points += (
-                educationLevelCalculator.calculate(proModel)
-                + internetTestCalculator.calculate(proModel)
-                + pastExperiencesCalculator.calculate(proModel)
-                + referralCodeCalculator.calculate(proModel)
-                + writeScoreCalculator.calculate(proModel)
-                )
+        points = listOf(
+            EducationLevelCalculator(),
+            InternetTestCalculator(),
+            PastExperiencesCalculator(),
+            ReferralCodeCalculator(),
+            WriteScoreCalculator()
+        ).sumOf { it.calculate(proModel) }
         this.projects = projects
         this.proModel = proModel
     }

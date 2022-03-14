@@ -10,7 +10,7 @@ class InternetTestCalculator: OutputCalculatorI {
 
         if(proModel.internetTest.downloadSpeed>50.0)
             internetTestPoint += 1
-        else
+        else if(proModel.internetTest.downloadSpeed<5.0)
             internetTestPoint += -1
 
         return internetTestPoint
