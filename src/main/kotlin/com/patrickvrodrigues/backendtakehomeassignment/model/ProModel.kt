@@ -3,6 +3,7 @@ package com.patrickvrodrigues.backendtakehomeassignment.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.patrickvrodrigues.backendtakehomeassignment.enums.EducationLevelEnum
 import javax.persistence.*
+import javax.validation.constraints.Min
 
 @Entity(name="pro")
 data class ProModel (
@@ -10,6 +11,7 @@ data class ProModel (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     @Column(nullable = false)
+    @Min(value = 18, message = "age must be over 18")
     var age: Int,
 
     @Column
@@ -27,4 +29,6 @@ data class ProModel (
     var writingScore: Double,
     @JsonProperty("referral_code")
     var referralCode: String?
-        )
+        ){
+
+}

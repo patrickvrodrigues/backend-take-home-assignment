@@ -1,5 +1,7 @@
 package com.patrickvrodrigues.backendtakehomeassignment.service
 
+import com.patrickvrodrigues.backendtakehomeassignment.enums.Errors
+import com.patrickvrodrigues.backendtakehomeassignment.exception.NotFoundException
 import com.patrickvrodrigues.backendtakehomeassignment.model.InternetTestModel
 import com.patrickvrodrigues.backendtakehomeassignment.model.PastExperiencesModel
 import com.patrickvrodrigues.backendtakehomeassignment.model.ProModel
@@ -33,5 +35,9 @@ class ProService(
 
     fun getAll(): List<ProModel> {
         return proRepository.findAll().toList()
+    }
+
+    fun findById(id: Int): ProModel{
+        return proRepository.findById(id).orElseThrow{ NotFoundException(Errors.THA101.message.format(id), Errors.THA101.code) }
     }
 }

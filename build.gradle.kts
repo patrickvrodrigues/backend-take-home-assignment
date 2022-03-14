@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.5.32"
 	kotlin("plugin.spring") version "1.5.32"
 	kotlin("plugin.jpa") version "1.4.21"
+	jacoco
 }
 
 group = "com.patrickvrodrigues"
@@ -28,6 +29,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.12.3")
 }
 
 tasks.withType<KotlinCompile> {

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAlias
 import com.patrickvrodrigues.backendtakehomeassignment.enums.EducationLevelEnum
 import com.patrickvrodrigues.backendtakehomeassignment.model.InternetTestModel
 import com.patrickvrodrigues.backendtakehomeassignment.model.PastExperiencesModel
+import com.patrickvrodrigues.backendtakehomeassignment.validation.EducationLevelCorrect
+import javax.persistence.Enumerated
 import javax.validation.Valid
 import javax.validation.constraints.*
 
@@ -14,6 +16,8 @@ data class PostProRequest (
 
     @NotNull
     @JsonAlias("education_level")
+    @EducationLevelCorrect
+    @Enumerated
     var educationLevel: EducationLevelEnum,
 
     @NotNull
